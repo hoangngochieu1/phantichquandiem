@@ -11,6 +11,7 @@ import pandas as pd
 import altair as alt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
 
 # Tải thẳng file .pt vào root app
 MODEL_PATH = "joint_acd_spc_model_final.pt"
@@ -34,14 +35,14 @@ def load_all():
     # 1️⃣ tải model .pt (nếu chưa có)
     download_model_from_drive()
 
-    # 2️⃣ load meta và tokenizer từ thư mục app hiện có
-    with open("meta.json") as f:
+    # 2️⃣ load meta
+    with open(f"{ARTIFACT_DIR}/meta.json") as f:
         meta = json.load(f)
 
-    with open("model_kwargs.json") as f:
+    with open(f"{ARTIFACT_DIR}/model_kwargs.json") as f:
         model_kwargs = json.load(f)
 
-    tokenizer = AutoTokenizer.from_pretrained("tokenizer")  # folder tokenizer trong root app
+    tokenizer = AutoTokenizer.from_pretrained(f"{ARTIFACT_DIR}/tokenizer")
 
     model = JointACDSPCModel(**model_kwargs)
     model.load_state_dict(
@@ -55,6 +56,7 @@ def load_all():
     model.eval()
 
     return model, tokenizer, meta
+
 
 model, tokenizer, meta = load_all()
 

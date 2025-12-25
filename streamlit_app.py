@@ -9,35 +9,25 @@ from model import JointACDSPCModel
 import matplotlib.pyplot as plt
 import pandas as pd
 import altair as alt
-import tempfile
+
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
 
-# MODEL_PATH = f"{ARTIFACT_DIR}/joint_acd_spc_model_final.pt"
-# GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51/view?usp=sharing"  # 👈 link file .pt trên Drive
+# Tải thẳng file .pt vào root app
+MODEL_PATH = "joint_acd_spc_model_final.pt"
+GDRIVE_FILE_URL = "https://drive.google.com/uc?id=1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51"  # link trực tiếp
 
-# print(os.path.exists(MODEL_PATH))
-# def download_model_from_drive():
-#     if not os.path.exists(MODEL_PATH):
-#         os.makedirs(ARTIFACT_DIR, exist_ok=True)
-#         gdown.download(
-#             url=GDRIVE_FILE_URL,
-#             output=MODEL_PATH,
-#             quiet=False,
-#             fuzzy=True
-#         )
-# import tempfile
-
-# # Thư mục lưu model trong repo
-# ARTIFACT_DIR = "./artifacts"  # lưu trong thư mục hiện tại
-os.makedirs(ARTIFACT_DIR, exist_ok=True)
-
-MODEL_PATH = os.path.join(ARTIFACT_DIR, "model.pt")
-GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51/view?usp=sharing"
+print("Model exists?", os.path.exists(MODEL_PATH))
 
 def download_model_from_drive():
+    """Tải model từ Google Drive nếu chưa có"""
     if not os.path.exists(MODEL_PATH):
-        gdown.download(GDRIVE_FILE_URL, MODEL_PATH, quiet=False)
+        gdown.download(
+            url=GDRIVE_FILE_URL,
+            output=MODEL_PATH,
+            quiet=False,
+            fuzzy=True
+        )
 
 # ---------- Load artifacts ----------
 @st.cache_resource
