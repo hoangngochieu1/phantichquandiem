@@ -11,15 +11,16 @@ import pandas as pd
 import altair as alt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
 
-MODEL_PATH = f"{ARTIFACT_DIR}/joint_acd_spc_model_final.pt"
-GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51/view?usp=sharing"  # 👈 link file .pt trên Drive
+# Tải thẳng file .pt vào root app
+MODEL_PATH = "joint_acd_spc_model_final.pt"
+GDRIVE_FILE_URL = "https://drive.google.com/uc?id=1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51"  # link trực tiếp
 
-print(os.path.exists(MODEL_PATH))
+print("Model exists?", os.path.exists(MODEL_PATH))
+
 def download_model_from_drive():
+    """Tải model từ Google Drive nếu chưa có"""
     if not os.path.exists(MODEL_PATH):
-        os.makedirs(ARTIFACT_DIR, exist_ok=True)
         gdown.download(
             url=GDRIVE_FILE_URL,
             output=MODEL_PATH,
@@ -27,27 +28,20 @@ def download_model_from_drive():
             fuzzy=True
         )
 
-
-
-
-def download_model_from_drive():
-    if not os.path.exists(MODEL_PATH):
-        gdown.download(GDRIVE_FILE_URL, MODEL_PATH, quiet=False)
-
 # ---------- Load artifacts ----------
 @st.cache_resource
 def load_all():
     # 1️⃣ tải model .pt (nếu chưa có)
     download_model_from_drive()
 
-    # 2️⃣ load meta
-    with open(f"{ARTIFACT_DIR}/meta.json") as f:
+    # 2️⃣ load meta và tokenizer từ thư mục app hiện có
+    with open("meta.json") as f:
         meta = json.load(f)
 
-    with open(f"{ARTIFACT_DIR}/model_kwargs.json") as f:
+    with open("model_kwargs.json") as f:
         model_kwargs = json.load(f)
 
-    tokenizer = AutoTokenizer.from_pretrained(f"{ARTIFACT_DIR}/tokenizer")
+    tokenizer = AutoTokenizer.from_pretrained("tokenizer")  # folder tokenizer trong root app
 
     model = JointACDSPCModel(**model_kwargs)
     model.load_state_dict(
@@ -61,7 +55,6 @@ def load_all():
     model.eval()
 
     return model, tokenizer, meta
-
 
 model, tokenizer, meta = load_all()
 
