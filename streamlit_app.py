@@ -8,7 +8,8 @@ from transformers import AutoTokenizer
 from model import JointACDSPCModel
 import matplotlib.pyplot as plt
 import pandas as pd
-import altair as alt
+import altair as alt 
+#dfd
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ARTIFACT_DIR = "/phantichquandiem/absa_prepared"
