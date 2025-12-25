@@ -16,7 +16,7 @@ ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
 MODEL_PATH = f"{ARTIFACT_DIR}/joint_acd_spc_model_final.pt"
 GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51/view?usp=sharing"  # 👈 link file .pt trên Drive
 
-
+print(os.path.exists(MODEL_PATH))
 def download_model_from_drive():
     if not os.path.exists(MODEL_PATH):
         os.makedirs(ARTIFACT_DIR, exist_ok=True)
