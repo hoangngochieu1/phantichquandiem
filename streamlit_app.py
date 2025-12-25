@@ -18,14 +18,14 @@ GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37
 
 
 def download_model_from_drive():
-    if not os.path.exists(MODEL_PATH):
-        os.makedirs(ARTIFACT_DIR, exist_ok=True)
-        gdown.download(
-            url=GDRIVE_FILE_URL,
-            output=MODEL_PATH,
-            quiet=False,
-            fuzzy=True
-        )
+    # if not os.path.exists(MODEL_PATH):
+    os.makedirs(ARTIFACT_DIR, exist_ok=True)
+    gdown.download(
+        url=GDRIVE_FILE_URL,
+        output=MODEL_PATH,
+        quiet=False,
+        fuzzy=True
+    )
 
 
 # ---------- Load artifacts ----------
