@@ -1,2 +1,5 @@
 streamlit
 pandas
+torch 
+numpy 
+transformers

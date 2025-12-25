@@ -1,0 +1,5 @@
+{
+  "num_aspects": 25,
+  "hf_model_name": "distilroberta-base",
+  "hf_available": true
+}
