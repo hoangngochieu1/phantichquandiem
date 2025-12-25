@@ -1,5 +1,8 @@
 streamlit
 pandas
-torch 
-numpy 
+torch
+numpy
 transformers
+gdown
+matplotlib
+altair

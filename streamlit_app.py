@@ -11,7 +11,7 @@ import pandas as pd
 import altair as alt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-ARTIFACT_DIR = "/workspaces/sentiment-analysis/absa_prepared"
+ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
 
 MODEL_PATH = f"{ARTIFACT_DIR}/joint_acd_spc_model_final.pt"
 GDRIVE_FILE_URL = "https://drive.google.com/file/d/1p99F1BKmL6mEZdPcDFzfQjN4Pv37UF51/view?usp=sharing"  # 👈 link file .pt trên Drive
