@@ -11,7 +11,7 @@ import pandas as pd
 import altair as alt
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-ARTIFACT_DIR = "/absa_prepared"
+ARTIFACT_DIR = "/phantichquandiem/absa_prepared"
 
 # Tải thẳng file .pt vào root app
 MODEL_PATH = "joint_acd_spc_model_final.pt"
