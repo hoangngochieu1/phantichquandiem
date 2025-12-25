@@ -9,6 +9,7 @@ from model import JointACDSPCModel
 import matplotlib.pyplot as plt
 import pandas as pd
 import altair as alt
+import tempfile
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ARTIFACT_DIR = "/workspaces/phantichquandiem/absa_prepared"
