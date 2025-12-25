@@ -8,10 +8,11 @@ from transformers import AutoTokenizer
 from model import JointACDSPCModel
 import matplotlib.pyplot as plt
 import pandas as pd
-import altair as alt
+import altair as alt 
+#dfd
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-ARTIFACT_DIR = "/absa_prepared"
+# ARTIFACT_DIR = "/phantichquandiem/absa_prepared"
 
 # Tải thẳng file .pt vào root app
 MODEL_PATH = "joint_acd_spc_model_final.pt"
@@ -36,13 +37,13 @@ def load_all():
     download_model_from_drive()
 
     # 2️⃣ load meta
-    with open(f"{ARTIFACT_DIR}/meta.json") as f:
+    with open(f"meta.json") as f:
         meta = json.load(f)
 
-    with open(f"{ARTIFACT_DIR}/model_kwargs.json") as f:
+    with open(f"model_kwargs.json") as f:
         model_kwargs = json.load(f)
 
-    tokenizer = AutoTokenizer.from_pretrained(f"{ARTIFACT_DIR}/tokenizer")
+    tokenizer = AutoTokenizer.from_pretrained(f"tokenizer")
 
     model = JointACDSPCModel(**model_kwargs)
     model.load_state_dict(
